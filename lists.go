@@ -228,7 +228,7 @@ type Activity struct {
 	withLinks
 }
 
-func (list ListResponse) GetActivity(params *BasicQueryParams) (*ListOfActivity, error) {
+func (list ListResponse) GetActivity(params *BasicQueryParams, api API) (*ListOfActivity, error) {
 	if err := list.CanMakeRequest(); err != nil {
 		return nil, err
 	}
@@ -236,7 +236,7 @@ func (list ListResponse) GetActivity(params *BasicQueryParams) (*ListOfActivity,
 	endpoint := fmt.Sprintf(activity_path, list.ID)
 	response := new(ListOfActivity)
 
-	return response, list.api.Request("GET", endpoint, params, nil, response)
+	return response, api.Request("GET", endpoint, params, nil, response)
 }
 
 // ------------------------------------------------------------------------------------------------
